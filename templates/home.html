@@ -1,0 +1,47 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <title>PCD Lookup</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="/static/apple-touch-icon.png"/>
+    <link rel="stylesheet" type="text/css" href="/static/home.css" />
+</head>
+<body>
+    <img class="logo" src="/static/logo.png" alt="logo" />
+    <h1>Multi-Fit Wheel App</h1>
+    <form>
+        <select name="MakeSelection" onchange='this.form.submit()'>
+            <option value=""></option>
+            {% for make in makes %}
+                <option {{'selected' if provided_parameters['MakeSelection'] == make.id|string() else ''}} value="{{make.id}}" >{{make.Make}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <select name="ModelSelection" onchange='this.form.submit()'>
+            <option value=""></option>
+            {% for model in models %}
+                <option {{'selected' if provided_parameters['ModelSelection'] == model.id|string() else ''}} value="{{model.id}}" >{{model.Model}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <select name="YearSelection" onchange='this.form.submit()'>
+            <option value=""></option>
+            {% for year in years %}
+                <option {{'selected' if provided_parameters['YearSelection'] == year.Year|string() else ''}} value="{{year.Year}}">{{year.Year}}</option>
+            {% endfor %}
+        </select>
+        <noscript><input type="submit" value="Submit"></noscript>
+    </form>
+    {% for entry in result %}
+        <ul>
+            <li><b>PCD 0/1:</b> {{entry.PCD01}}</li>
+            <li><b>Multifit Possible:</b> {{entry.Multi_fit_possible}}</li>
+            <li><b>Hub:</b> {{entry.Hub}}</li>
+            <li><b>Fitment Front/Rear:</b> {{entry.FitmentFrontrear}}</li>
+            <li><b>Spacer:</b> {{entry.Spacer}}</li>
+            <li><b>Bolts:</b> {{entry.Bolts}}</li>
+            <li><b>Notes:</b> {{entry.Notes}}</li>
+        </ul>
+    {% endfor %}
+</body>
