@@ -39,3 +39,8 @@ def index():
 
 
     return render_template('home.html', makes=make_table, models=myfilteredmodels, years=myfilteredyears, provided_parameters=provided_parameters, result=result)
+
+
+@app.route('/feedback', methods=["GET", "POST"])
+def feedback():
+    return render_template('feedback.html')
